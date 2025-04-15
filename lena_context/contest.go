@@ -15,7 +15,6 @@ import (
  */
 
 func luckBalance(k int32, contests [][]int32) int32 {
-	// Write your code here
 	var n int32 = 0
 	fmt.Println(contests)
 	fmt.Println("n=", n, "k=", k)
