@@ -1,13 +1,8 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"io"
-	"os"
 	"sort"
-	"strconv"
-	"strings"
 )
 
 /*
@@ -48,62 +43,5 @@ func luckBalance(k int32, contests [][]int32) int32 {
 }
 
 func main() {
-	reader := bufio.NewReaderSize(os.Stdin, 16*1024*1024)
-
-	stdout, err := os.Create(os.Getenv("OUTPUT_PATH"))
-	checkError(err)
-
-	defer stdout.Close()
-
-	writer := bufio.NewWriterSize(stdout, 16*1024*1024)
-
-	firstMultipleInput := strings.Split(strings.TrimSpace(readLine(reader)), " ")
-
-	nTemp, err := strconv.ParseInt(firstMultipleInput[0], 10, 64)
-	checkError(err)
-	n := int32(nTemp)
-
-	kTemp, err := strconv.ParseInt(firstMultipleInput[1], 10, 64)
-	checkError(err)
-	k := int32(kTemp)
-
-	var contests [][]int32
-	for i := 0; i < int(n); i++ {
-		contestsRowTemp := strings.Split(strings.TrimRight(readLine(reader), " \t\r\n"), " ")
-
-		var contestsRow []int32
-		for _, contestsRowItem := range contestsRowTemp {
-			contestsItemTemp, err := strconv.ParseInt(contestsRowItem, 10, 64)
-			checkError(err)
-			contestsItem := int32(contestsItemTemp)
-			contestsRow = append(contestsRow, contestsItem)
-		}
-
-		if len(contestsRow) != 2 {
-			panic("Bad input")
-		}
-
-		contests = append(contests, contestsRow)
-	}
-
-	result := luckBalance(k, contests)
-
-	fmt.Fprintf(writer, "%d\n", result)
-
-	writer.Flush()
-}
-
-func readLine(reader *bufio.Reader) string {
-	str, _, err := reader.ReadLine()
-	if err == io.EOF {
-		return ""
-	}
-
-	return strings.TrimRight(string(str), "\r\n")
-}
-
-func checkError(err error) {
-	if err != nil {
-		panic(err)
-	}
+	fmt.Println(luckBalance(3, [][]int32{{5, 1}, {2, 1}, {1, 1}, {8, 1}, {10, 0}, {5, 0}}))
 }
